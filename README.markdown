@@ -1,5 +1,7 @@
 # Grape-Doorkeeper
 
+[![Build Status](https://travis-ci.org/asfarto/app-api.svg?branch=master)](https://travis-ci.org/asfarto/app-api)
+
 #### Create an awesome versioned API, secured with OAuth2 and automatically documented.
 
 This is a basic Rails 4 application with [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper), [Grape](https://github.com/intridea/grape) & [Swagger](http://swagger.io/) for getting to API building quickly.

@@ -1,11 +1,11 @@
 {
-  "name": "Grape Doorkeeper",
-  "description": "A basic Rails 4 app ready to make a kick ass API",
-  "repository": "https://github.com/sethherr/grape-doorkeeper",
+  "name": "App Api",
+  "description": "A basic Rails 4 app with API",
+  "repository": "https://github.com/asfarto/app-api",
   "keywords": ["rails", "doorkeeper", "grape", "swagger", "rest", "api", "OAuth"],
-  "logo": "https://github.com/bikeindex/bike_index/raw/master/bike_index.png?raw=true",
+  "logo": "https://avatars3.githubusercontent.com/u/3983571",
   "scripts": {
-      "postdeploy": "bundle exec rake db:migrate"
+      "postdeploy": "bundle exec rake db:create; bundle exec rake db:migrate"
     },
-  "addons": ["heroku-postgresql"]
+  "addons": ["cleardb, mongolab"]
 }

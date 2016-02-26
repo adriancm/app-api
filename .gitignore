@@ -19,3 +19,5 @@
 # Ignore rvm stuff and things
 dump.rdb
 .ruby-*
+
+.idea

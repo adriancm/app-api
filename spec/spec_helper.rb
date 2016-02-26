@@ -37,7 +37,7 @@ end
 
 def create_doorkeeper
   @user = FactoryGirl.create(:user)
-  @application = Doorkeeper::Application.create(name: "MyApp", redirect_uri: "https://app.com")
+  @application = Doorkeeper::Application.create(name: 'MyApp', redirect_uri: 'https://app.com')
 end
 
 def create_doorkeeper_app(opts={})

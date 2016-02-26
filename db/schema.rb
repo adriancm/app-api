@@ -13,31 +13,28 @@
 
 ActiveRecord::Schema.define(version: 20150218202351) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "oauth_access_grants", force: :cascade do |t|
-    t.integer  "resource_owner_id", null: false
-    t.integer  "application_id",    null: false
-    t.string   "token",             null: false
-    t.integer  "expires_in",        null: false
-    t.text     "redirect_uri",      null: false
-    t.datetime "created_at",        null: false
+    t.integer  "resource_owner_id", limit: 4,     null: false
+    t.integer  "application_id",    limit: 4,     null: false
+    t.string   "token",             limit: 255,   null: false
+    t.integer  "expires_in",        limit: 4,     null: false
+    t.text     "redirect_uri",      limit: 65535, null: false
+    t.datetime "created_at",                      null: false
     t.datetime "revoked_at"
-    t.string   "scopes"
+    t.string   "scopes",            limit: 255
   end
 
   add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
 
   create_table "oauth_access_tokens", force: :cascade do |t|
-    t.integer  "resource_owner_id"
-    t.integer  "application_id"
-    t.string   "token",             null: false
-    t.string   "refresh_token"
-    t.integer  "expires_in"
+    t.integer  "resource_owner_id", limit: 4
+    t.integer  "application_id",    limit: 4
+    t.string   "token",             limit: 255, null: false
+    t.string   "refresh_token",     limit: 255
+    t.integer  "expires_in",        limit: 4
     t.datetime "revoked_at"
-    t.datetime "created_at",        null: false
-    t.string   "scopes"
+    t.datetime "created_at",                    null: false
+    t.string   "scopes",            limit: 255
   end
 
   add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
@@ -45,11 +42,11 @@ ActiveRecord::Schema.define(version: 20150218202351) do
   add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
 
   create_table "oauth_applications", force: :cascade do |t|
-    t.string   "name",                      null: false
-    t.string   "uid",                       null: false
-    t.string   "secret",                    null: false
-    t.text     "redirect_uri",              null: false
-    t.string   "scopes",       default: "", null: false
+    t.string   "name",         limit: 255,                null: false
+    t.string   "uid",          limit: 255,                null: false
+    t.string   "secret",       limit: 255,                null: false
+    t.text     "redirect_uri", limit: 65535,              null: false
+    t.string   "scopes",       limit: 255,   default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,24 +54,35 @@ ActiveRecord::Schema.define(version: 20150218202351) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string   "username",               limit: 255, default: "", null: false
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.string   "name"
-    t.string   "uid"
-    t.string   "provider"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "name",                   limit: 255
+    t.string   "uid",                    limit: 255
+    t.string   "provider",               limit: 255
+    t.string   "confirmation_token",     limit: 255
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email",      limit: 255
+    t.integer  "failed_attempts",        limit: 4,   default: 0,  null: false
+    t.string   "unlock_token",           limit: 255
+    t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

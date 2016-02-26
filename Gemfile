@@ -2,9 +2,13 @@ ruby '2.2.3'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 # Use mysql as the database for Active Record
 gem 'mysql2'
+
+gem 'mongoid', '~> 5.1.0'
+gem 'bson_ext'
+
 gem 'sass'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 2.7.2'
@@ -19,14 +23,16 @@ gem 'turbolinks'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Basic running
-gem 'haml'
+gem 'slim'
+gem 'bootstrap-sass'
+
 gem 'puma'
-gem 'bootstrap-sass', '~> 3.3.1'
+
 gem 'devise'
 gem 'omniauth'
-gem "omniauth-bike-index"
+gem 'omniauth-bike-index'
 gem 'devise-bootstrap-views'
-gem "hashie-forbidden_attributes"
+gem 'hashie-forbidden_attributes'
 
 # Store configuration options
 gem 'dotenv-rails'

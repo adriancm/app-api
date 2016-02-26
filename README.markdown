@@ -8,7 +8,7 @@ This is a basic Rails 4 application with [Doorkeeper](https://github.com/doorkee
 
 You can view the [live app](https://grape-doorkeeper.herokuapp.com) and the [Swagger-ui documentation](https://grape-doorkeeper.herokuapp.com/documentation). 
 
-This app is ready to deploy to Heroku [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/sethherr/grape-doorkeeper)
+This app is ready to deploy to Heroku [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/asfarto/app-api)
 
 
 ## Set up

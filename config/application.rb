@@ -28,7 +28,7 @@ module GrapeDoorkeeper
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.middleware.insert_before "ActionDispatch::Static", "Rack::Cors" do
+    config.middleware.insert_before 'ActionDispatch::Static', 'Rack::Cors' do
       # Permit CORS from any origin, only in the API route
       allow do
         origins '*'
@@ -37,8 +37,9 @@ module GrapeDoorkeeper
     end
 
     config.generators do |g|
+      g.orm :mongoid
       g.test_framework :rspec
-      g.factory_girl false      
+      g.factory_girl false
     end
 
     # Do not swallow errors in after_commit/after_rollback callbacks.

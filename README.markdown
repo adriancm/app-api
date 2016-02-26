@@ -1,6 +1,7 @@
 # Grape-Doorkeeper
 
 [![Build Status](https://travis-ci.org/asfarto/app-api.svg?branch=master)](https://travis-ci.org/asfarto/app-api)
+[![Code Climate](https://codeclimate.com/github/asfarto/app-api/badges/gpa.svg)](https://codeclimate.com/github/asfarto/app-api)
 
 #### Create an awesome versioned API, secured with OAuth2 and automatically documented.
 

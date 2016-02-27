@@ -4,8 +4,5 @@
   "repository": "https://github.com/asfarto/app-api",
   "keywords": ["rails", "doorkeeper", "grape", "swagger", "rest", "api", "OAuth"],
   "logo": "https://avatars3.githubusercontent.com/u/3983571",
-  "scripts": {
-      "postdeploy": "bundle exec rake db:create; bundle exec rake db:migrate"
-    },
   "addons": ["cleardb", "mongolab"]
 }

@@ -1,8 +1,0 @@
-{
-  "name": "App Api",
-  "description": "A basic Rails 4 app with API",
-  "repository": "https://github.com/asfarto/app-api",
-  "keywords": ["rails", "doorkeeper", "grape", "swagger", "rest", "api", "OAuth"],
-  "logo": "https://avatars3.githubusercontent.com/u/3983571",
-  "addons": ["cleardb", "mongolab"]
-}

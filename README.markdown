@@ -1,16 +1,17 @@
-# Grape-Doorkeeper
+# App-API 
 
 [![Build Status](https://travis-ci.org/asfarto/app-api.svg?branch=master)](https://travis-ci.org/asfarto/app-api)
 [![Code Climate](https://codeclimate.com/github/asfarto/app-api/badges/gpa.svg)](https://codeclimate.com/github/asfarto/app-api)
 [![Dependency Status](https://gemnasium.com/asfarto/app-api.svg)](https://gemnasium.com/asfarto/app-api)
 
+ [![Deploy](https://www.herokucdn.com/favicon.ico)](https://v-app-api.herokuapp.com/)
+ 
 #### Create an awesome versioned API, secured with OAuth2 and automatically documented.
 
 This is a basic Rails 4 application with [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper), [Grape](https://github.com/intridea/grape) & [Swagger](http://swagger.io/) for getting to API building quickly.
 
-You can view the [live app](https://grape-doorkeeper.herokuapp.com) and the [Swagger-ui documentation](https://grape-doorkeeper.herokuapp.com/documentation). 
+You can view the [live app](https://grape-doorkeeper.herokuapp.com) and the [Swagger-ui documentation](https://v-app-api.herokuapp.com/documentation). 
 
-This app is ready to deploy to Heroku [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/asfarto/app-api)
 
 
 ## Set up

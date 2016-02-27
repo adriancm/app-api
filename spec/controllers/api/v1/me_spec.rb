@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Me API V1', type: :request do
   describe 'current' do
-    it "Sends correct error code when no user present" do
+    it 'Sends correct error code when no user present' do
       get '/api/v1/me'
       expect(response.response_code).to eq(401)
       expect(response.body.match('OAuth')).to be_present
@@ -11,15 +11,15 @@ describe 'Me API V1', type: :request do
       expect(response.headers['Access-Control-Request-Method']).to eq('*')
     end
     
-    it "fails if no access token" do 
+    it 'fails if no access token' do
       get '/api/v1/me', format: :json
       expect(response.response_code).to eq(401)
-      expect(JSON(response.body)["error"].present?).to be_truthy
+      expect(JSON(response.body)['error'].present?).to be_truthy
       expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
       expect(response.headers['Access-Control-Request-Method']).to eq('*')
     end
 
-    it "responds with the user" do
+    it 'responds with the user' do
       create_doorkeeper_app(scopes: OAUTH_SCOPES_S)
       get '/api/v1/me', format: :json, access_token: @token.token
       result = JSON.parse(response.body)
@@ -31,7 +31,7 @@ describe 'Me API V1', type: :request do
   end
 
   describe 'items' do 
-    it "gets items, returning correct pagination serialized by the serializer" do
+    it 'gets items, returning correct pagination serialized by the serializer' do
       create_doorkeeper_app(scopes: OAUTH_SCOPES_S)
       get '/api/v1/me/items', format: :json, access_token: @token.token
       result = JSON.parse(response.body)
@@ -48,8 +48,8 @@ describe 'Me API V1', type: :request do
       it "fails if the access token doesn't have the required scope" do
         create_doorkeeper_app(scopes: 'read_user')
         orig_name = @user.name
-        attribs = {email: 'foo@bar.com', name: 'new namething', access_token: @token.token}
-        put '/api/v1/me', attribs, format: :json
+        attributes = {email: 'foo@bar.com', name: 'new namething', access_token: @token.token}
+        put '/api/v1/me', attributes, format: :json
 
         expect(response.response_code).to eq(403)
         expect(response.body.match(/OAuth error.* write to user/i)).to be_present
@@ -58,24 +58,21 @@ describe 'Me API V1', type: :request do
       end
     end
     context 'scoped access token' do
-      it "updates the user" do 
+      it 'updates the user' do
         create_doorkeeper_app(scopes: 'write_user')
-        orig_name = @user.name
-        attribs = {email: 'foo@bar.com', name: 'new namething', access_token: @token.token}
-        put '/api/v1/me', attribs, format: :json
+        attributes = {email: 'foo@bar.com', name: 'new name', access_token: @token.token}
+        put '/api/v1/me', attributes, format: :json
         @user.reload
-        result = JSON.parse(response.body)
 
         expect(response.response_code).to eq(200)
-        expect(@user.name).to eq('new namething')
-        expect(@user.email).to eq('foo@bar.com')
+        expect(@user.name).to eq('new name')
+        expect(@user.unconfirmed_email).to eq('foo@bar.com')
       end
 
       it "fails when one of the supplied values isn't in the params" do 
         create_doorkeeper_app(scopes: 'write_user')
-        orig_name = @user.name
-        attribs = {demo_value: 'foo', name: 'other', access_token: @token.token}
-        put '/api/v1/me', attribs, format: :json
+        attributes = {demo_value: 'foo', name: 'other', access_token: @token.token}
+        put '/api/v1/me', attributes, format: :json
 
         expect(response.response_code).to eq(400)
         expect(response.body).to match('demo_value does not have a valid value')

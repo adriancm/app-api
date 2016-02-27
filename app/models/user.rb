@@ -1,20 +1,47 @@
+# User class
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable, :omniauth_providers => [:bike_index]
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable, :lockable, # :timeoutable,
+         :omniauthable, authentication_keys: [:login] #:omniauth_providers => [:facebook]
 
+  attr_accessor :login
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
 
   def self.from_omniauth(uid, auth)
-    where(email: auth.info.email).first_or_create do |user|
-      user.email = auth.info.email
+    info = auth.info
+    email = info.email
+    where(email: email).first_or_create do |user|
+      user.uid = uid
+      user.username = info.username
+      user.email = email
       user.password = Devise.friendly_token[0,20]
     end
   end
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.bike_index_email"] && session["devise.bike_index_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
+  def self.new_with_session(params,session)
+    user_attributes = session['devise.user_attributes']
+    if user_attributes
+      new(user_attributes,without_protection: true) do |user|
+        user.attributes = params
+        user.valid?
       end
+    else
+      super
+    end
+  end
+
+  private
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:login)
+    query = where(conditions.to_hash)
+    if login
+      query.where(['lower(username) = :value OR lower(email) = :value', {value: login.downcase}]).take
+    else
+      query.take
     end
   end
 

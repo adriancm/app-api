@@ -65,5 +65,5 @@ test:
 production:
   <<: *default
   database: app-api_production
-  username: app-api
-  password: <%= ENV['GRAPE-DOORKEEPER_DATABASE_PASSWORD'] %>
+  username: <%= ENV['APP_API_DATABASE_USER'] %>
+  password: <%= ENV['APP_API_DATABASE_PASSWORD'] %>

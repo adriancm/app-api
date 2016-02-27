@@ -44,5 +44,16 @@ module GrapeDoorkeeper
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.action_mailer.default_url_options = { host: ENV['DEFAULT_HOST'] }
+    config.action_mailer.smtp_settings = {
+        address: ENV['EMAIL_ADDRESS'],
+        port: ENV['EMAIL_PORT'],
+        domain: ENV['EMAIL_DOMAIN'],
+        user_name: ENV['EMAIL_USER_NAME'],
+        password: ENV['EMAIL_PASS'],
+        authentication: ENV['EMAIL_AUTHENTICATION'],
+        enable_starttls_auto: ENV['EMAIL_STARTTLS']
+    }
   end
 end

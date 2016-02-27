@@ -8,9 +8,19 @@ FactoryGirl.define do
     "foo#{n}@bar.com"
   end
 
+  sequence :unique_username do |n|
+    "unique username#{n}"
+  end
+
+  sequence :password do |n|
+    "password#{n}"
+  end
+
   factory :user do
     name  { generate(:unique_name) }
     email { generate(:unique_email) }
+    username { generate(:unique_username) }
+    password { generate(:password) }
   end
 
 end

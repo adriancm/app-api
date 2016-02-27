@@ -2,12 +2,12 @@ ruby '2.2.3'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.1'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
 gem 'mongoid', '~> 5.1.0'
-gem 'bson_ext'
+gem 'bson_ext' #, '~> 1.12.5'
 
 gem 'sass'
 gem 'sass-rails', '~> 5.0'
@@ -15,7 +15,7 @@ gem 'uglifier', '>= 2.7.2'
 gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.0.4'
+gem 'jquery-rails', '~> 4.1.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
@@ -58,16 +58,16 @@ gem 'swagger-ui_rails', github: 'audionerd/swagger-ui_rails'
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'shoulda-matchers', require: false
   gem 'foreman'
   gem 'rerun'
   gem 'vcr'
-  gem 'rspec', '~>3.3.0'
+  gem 'rspec'
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'growl'
   gem 'guard'
-  gem 'guard-rspec', '4.2.8'
+  gem 'guard-rspec'
   gem 'guard-livereload'
 end
 

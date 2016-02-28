@@ -55,7 +55,7 @@
                           = submit_tag 'Delete', onclick: "return confirm('Are you sure?')", class: 'btn btn-danger'
             - else
               h4 no tokens
-              - if application.redirect_uri.match("#{authorize_documentation_index_url}")
+              - if application.redirect_uri.match("#{authorize_developers_url}")
                 .clearfix
                   a.btn.pull-right.add-token-form-btn href='#' data-target="add-token-app#{application.id}"
                     Add token
@@ -66,7 +66,7 @@
                         label.checkbox.newtoken-scope-check
                           = check_box_tag scope
                           = scope.to_s
-                    - url = oauth_authorization_url(client_id: application.uid, redirect_uri: authorize_documentation_index_url, response_type: 'code')
+                    - url = oauth_authorization_url(client_id: application.uid, redirect_uri: authorize_developers_url, response_type: 'code')
                     p.authorize-new-explain
                       Authorize this new token:
                     pre
@@ -80,7 +80,7 @@
     p
       You don't have any applications set up! To be able to use the API you will need to create an application and generate an access token.
     p
-      | #{link_to "Add an application here", oauth_applications_path }.
+      | #{link_to 'Add an application here', oauth_applications_path }.
 - else
   h3.centered
-    | You have to #{link_to "sign in", new_user_session_url}!
+    | You have to #{link_to 'sign in', new_user_session_url}!

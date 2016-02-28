@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   use_doorkeeper
   mount API::Base => '/api'
-  resources :documentation, only: [:index] do
+  resources :developers, only: [:index] do
     collection do
       get :o2c
       get :authorize

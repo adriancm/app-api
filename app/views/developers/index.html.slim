@@ -4,13 +4,13 @@ html
     title App-API documentation
     link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css" /
     = stylesheet_link_tag \
-      "documentation",
-      media: "all"
+      'developers',
+      media: 'all'
 
-    | <script type="text/javascript">window.base_url = "#{ENV['BASE_URL']}";</script>
+    | <script type="text/javascript">window.base_url = "#{ENV['DEFAULT_HOST']}";</script>
 
     = javascript_include_tag \
-      "documentation"
+      'developers'
 
     body.swagger-section
       header#header.content-header
@@ -22,7 +22,7 @@ html
                 | Grape Doorkeeper
               input#input_baseUrl.form-control name="baseUrl" placeholder='http://v-app-api.herokuapp.com/' type="text"
             .api-header-group.api-header-key
-              label  for: 'baseUrl'  
+              label for: 'baseUrl'
                 | API key
               input#input_apiKey.form-control name="apiKey" placeholder="api_key" type="text" 
             a#explore.btn.btn-primary href="#" 
@@ -32,6 +32,30 @@ html
         .outside-info
           h2
             | App-API endpoints
+          .outside-info
+            h2
+              | Sending the authentication token
+            p
+              strong
+                | In the header you can send the authentication for a user in the header of your request.
+              code
+                |  Authorization: Bearer TOKEN_STRING
+
+              em
+                |  This is what Swagger does on this page. It's the recommended approach.
+            p
+              strong
+                | in query as an <code>access_token</code> parameter, e.g.
+              a href="#"
+                |  #{ENV['DEFAULT_HOST']}/api/me?access_token=TOKEN_STRING
+            h2
+              | Versioning
+            p
+              | In the header you can send Accept-Version for set the version of the API. By default returns v1.
+              |  If you need pass to v2, just add in the header:
+              code
+                |  Accept-Version: v2
+            hr
 
       #message-bar.swagger-ui-wrap &nbsp;
       #swagger-ui-container.swagger-ui-wrap

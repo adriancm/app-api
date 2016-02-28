@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DocumentationController do
+describe DevelopersController do
 
   describe 'view documentation index' do 
     before do 

@@ -30,7 +30,6 @@ gem 'puma'
 
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-bike-index'
 gem 'devise-bootstrap-views'
 gem 'hashie-forbidden_attributes'
 

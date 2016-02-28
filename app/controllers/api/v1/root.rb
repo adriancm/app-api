@@ -2,7 +2,8 @@ module API
   module V1
     class Root < Dispatch
       format :json
-      version 'v1'
+      version 'v1', using: :accept_version_header #:header, vendor: 'app-api'
+
       default_error_formatter :json
       content_type :json, 'application/json'
       use ::WineBouncer::OAuth2
@@ -31,19 +32,19 @@ module API
 
       mount API::V1::Me
       
-      add_swagger_documentation base_path: "/api",
+      add_swagger_documentation base_path: '/api',
         api_version: 'v1',
         hide_format: true, # don't show .json
         hide_documentation_path: true,
-        mount_path: "/swagger_doc",
+        mount_path: '/public',
         markdown: GrapeSwagger::Markdown::KramdownAdapter,
         info: {
-            title: "Grape Swagger base app",
-            description: "This is the base api provided by the awesome sample app - https://github.com/sethherr/grape-doorkeeper",
+            title: 'Grape Swagger base app',
+            description: 'This is the base api provided by the app - https://github.com/asfarto/app-api',
           }
 
       route :any, '*path' do
-        raise StandardError, "Unable to find endpoint"
+        raise StandardError, 'Unable to find endpoint'
       end
     end
   end

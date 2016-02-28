@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Me API V1', type: :request do
   describe 'current' do
     it 'Sends correct error code when no user present' do
-      get '/api/v1/me'
+      get '/apime'
       expect(response.response_code).to eq(401)
       expect(response.body.match('OAuth')).to be_present
       expect(response.headers['Content-Type'].match('json')).to be_present
@@ -12,7 +12,7 @@ describe 'Me API V1', type: :request do
     end
     
     it 'fails if no access token' do
-      get '/api/v1/me', format: :json
+      get '/api/me', format: :json
       expect(response.response_code).to eq(401)
       expect(JSON(response.body)['error'].present?).to be_truthy
       expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
@@ -21,7 +21,7 @@ describe 'Me API V1', type: :request do
 
     it 'responds with the user' do
       create_doorkeeper_app(scopes: OAUTH_SCOPES_S)
-      get '/api/v1/me', format: :json, access_token: @token.token
+      get '/api/me', format: :json, access_token: @token.token
       result = JSON.parse(response.body)
       expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
       expect(result['user']['name']).to eq(@user.name)
@@ -33,7 +33,7 @@ describe 'Me API V1', type: :request do
   describe 'items' do 
     it 'gets items, returning correct pagination serialized by the serializer' do
       create_doorkeeper_app(scopes: OAUTH_SCOPES_S)
-      get '/api/v1/me/items', format: :json, access_token: @token.token
+      get '/api/me/items', format: :json, access_token: @token.token
       result = JSON.parse(response.body)
 
       expect(result['me'][0].keys.include?('secret')).to_not be_present
@@ -49,7 +49,7 @@ describe 'Me API V1', type: :request do
         create_doorkeeper_app(scopes: 'read_user')
         orig_name = @user.name
         attributes = {email: 'foo@bar.com', name: 'new namething', access_token: @token.token}
-        put '/api/v1/me', attributes, format: :json
+        put '/api/me', attributes, format: :json
 
         expect(response.response_code).to eq(403)
         expect(response.body.match(/OAuth error.* write to user/i)).to be_present
@@ -61,7 +61,7 @@ describe 'Me API V1', type: :request do
       it 'updates the user' do
         create_doorkeeper_app(scopes: 'write_user')
         attributes = {email: 'foo@bar.com', name: 'new name', access_token: @token.token}
-        put '/api/v1/me', attributes, format: :json
+        put '/api/me', attributes, format: :json
         @user.reload
 
         expect(response.response_code).to eq(200)
@@ -72,7 +72,7 @@ describe 'Me API V1', type: :request do
       it "fails when one of the supplied values isn't in the params" do 
         create_doorkeeper_app(scopes: 'write_user')
         attributes = {demo_value: 'foo', name: 'other', access_token: @token.token}
-        put '/api/v1/me', attributes, format: :json
+        put '/api/me', attributes, format: :json
 
         expect(response.response_code).to eq(400)
         expect(response.body).to match('demo_value does not have a valid value')

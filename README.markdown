@@ -10,20 +10,13 @@
 
 This is a basic Rails 4 application with [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper), [Grape](https://github.com/intridea/grape) & [Swagger](http://swagger.io/) for getting to API building quickly.
 
-You can view the [live app](https://grape-doorkeeper.herokuapp.com) and the [Swagger-ui documentation](https://v-app-api.herokuapp.com/documentation). 
-
-
+You can view the [live app](https://v-app-api.herokuapp.com/) and the [Swagger-ui documentation for developers](https://v-app-api.herokuapp.com/developers). 
 
 ## Set up
 
 First `bundle install` and `rake db:setup`
 
 Run `rake start` to get the server running locally. It runs at [http://localhost:3001](http://localhost:3001)
-
-## Adding to an existing application
-
-[View how to on the wiki](https://github.com/sethherr/grape-doorkeeper/wiki/Adding-to-an-existing-application).
-
 
 ## Notes
 
@@ -50,10 +43,10 @@ Also important, but maybe not as necessary to know about:
 - [grape-active_model_serializers](https://github.com/jrhe/grape-active_model_serializers) 
 - [CORS](https://github.com/cyu/rack-cors)
 - [foreman](https://github.com/ddollar/foreman) (in development to manage processes)
-- [Haml](http://haml.info/)
+- [Slim](http://slim-lang.com/)
 - [dotenv-rails](https://github.com/bkeepers/dotenv) (load environmental variables - .env is in .gitignore, so it isn't committed)
 - [Bootstrap](http://getbootstrap.com/)
-- Postgres
+- Mysql
 
 ----
 

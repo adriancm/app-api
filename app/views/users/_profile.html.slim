@@ -9,7 +9,7 @@ a.twPc-bg.twPc-block
         - when false
           = button_to t(:follow).capitalize, profile_user_path(user), class: 'btn btn-primary btn-large'
         - else
-          = button_to t(:edit).capitalize, edit_user_registration_url, class: 'btn btn-secondary btn-large'
+          = button_to t(:edit).capitalize, edit_user_registration_url, class: 'btn btn-secondary btn-large', method: :get
       .col-sm-3.col-md-2
         = link_to profile_user_path(user), title: (user.username), class: 'twPc-avatar'
           = image_tag user.avatar, alt: user.username

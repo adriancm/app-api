@@ -59,6 +59,10 @@ class User < ActiveRecord::Base
     nil
   end
 
+  def following_messages
+    messages
+  end
+
   private
 
   def self.find_for_database_authentication(warden_conditions)

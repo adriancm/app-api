@@ -1,1 +1,6 @@
-= render partial: 'users/profile', locals: {user: @user, followed: nil}
+= render partial: 'users/profile', locals: {user: @user, followed: @followed}
+.container-fluid
+  .container
+    = render 'messages/form'
+    .row
+      = render partial: 'messages/list', locals: {messages: current_user.messages }

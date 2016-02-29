@@ -55,6 +55,10 @@ class User < ActiveRecord::Base
     0
   end
 
+  def follow?(user)
+    nil
+  end
+
   private
 
   def self.find_for_database_authentication(warden_conditions)

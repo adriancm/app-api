@@ -34,9 +34,12 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 end
 
+def create_user
+  @user = FactoryGirl.create(:user)
+end
 
 def create_doorkeeper
-  @user = FactoryGirl.create(:user)
+  create_user
   @application = Doorkeeper::Application.create(name: 'MyApp', redirect_uri: 'https://app.com')
 end
 

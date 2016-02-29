@@ -1,0 +1,8 @@
+.container-fluid
+  .row.top10
+    .col-sm-5.col-md-4.bottom10
+      = render partial: 'users/mini_profile', locals: {user: current_user, followed: nil}
+    .col-sm-7.col-md-8
+      = render 'messages/form'
+      .row
+        = render partial: 'messages/list', locals: {messages: current_user.messages }

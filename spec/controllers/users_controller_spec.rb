@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe LandingController do
+describe UsersController do
 
-  describe 'view landing index' do 
+  describe 'view users index' do
     before do 
       get :index
     end

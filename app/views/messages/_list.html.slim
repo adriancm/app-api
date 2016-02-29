@@ -1,0 +1,16 @@
+ol#messages
+  - messages.each do |message|
+    li data-item-id="#{message.id}"
+      .content
+        .message-header
+          = link_to profile_user_path(message.user_id), title: (message.user.username)
+            = image_tag message.user.avatar, alt: message.user.username, size: '40x40'
+          span.username
+            s @
+            b = message.user.username
+        small.time
+          span = message.created_at.strftime('%d %B %Y')
+      .message-body
+        = message.text
+      .message-footer
+        = link_to t(:destroy).capitalize, message, :method => :delete, :data => {:confirm => 'Are you sure?'}

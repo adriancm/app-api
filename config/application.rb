@@ -37,7 +37,6 @@ module AppAPI
     end
 
     config.generators do |g|
-      g.orm :mongoid
       g.test_framework :rspec
       g.factory_girl false
     end

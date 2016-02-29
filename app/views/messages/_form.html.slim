@@ -1,0 +1,16 @@
+= form_for(@message) do |f|
+  - if @message.errors.any?
+    #error_explanation
+      h4
+        = pluralize(@message.errors.count, "error")
+        | prohibited this message from being saved:
+      ul
+        - @message.errors.full_messages.each do |message|
+          li= message
+  .row.bottom10
+    .col-xs-8.col-md-10
+      .field
+        = f.text_area :text, placeholder: t(:whatsapp), class: 'form-control text-area-wide'
+    .col-xs-4.col-md-2
+      .actions
+        = f.submit class: 'btn btn-success btn-all-width', value: t(:send).capitalize

@@ -1,0 +1,104 @@
+.twPc-bg {
+  background-image: asset-url('background.jpg');
+  background-position: 0 50%;
+  background-size: 100% auto;
+  border-bottom: 1px solid #e1e8ed;
+  border-radius: 4px 4px 0 0;
+  height: 360px;
+  @media screen and (max-width: $screen-md-max) {
+    height: 300px;
+  }
+  @media screen and (max-width: $screen-sm-max) {
+    height: 200px;
+  }
+  @media screen and (max-width: $screen-xs-max) {
+    height: 140px;
+  }
+  width: 100%;
+}
+.twPc-block {
+  display: block !important;
+}
+.twPc-button {
+  float: right;
+  margin: 20px 0 0;
+  height: 35px;
+}
+
+.twPc-bar {
+  margin-top: -80px;
+  .twPc-avatar {
+    float: left;
+    border: 6px solid #fff;
+    border-radius: 8px;
+    background-color: white;
+    img {
+      border: 0 solid #fff;
+      border-radius: 8px;
+      box-sizing: border-box;
+      color: #fff;
+      width: 100%;
+    }
+  }
+}
+
+.twPc-divUser {
+  margin: 95px 0 0;
+}
+.twPc-divName {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  a {
+    color: inherit !important;
+  }
+}
+
+.twPc-divStats {
+  padding: 5px 0;
+  margin-top: 35px;
+  @media screen and (max-width: $screen-xs-max) {
+    margin-top: 5px;
+  }
+}
+
+.twPc-Arrange {
+  box-sizing: border-box;
+  display: table;
+  margin: 0;
+  min-width: 100%;
+  padding: 0;
+  table-layout: auto;
+}
+
+ul.twPc-Arrange {
+  list-style: outside none none;
+  margin: 0;
+  padding: 0;
+}
+
+.twPc-ArrangeSizeFit {
+  display: table-cell;
+  padding: 0;
+  text-align: center;
+  vertical-align: top;
+}
+
+.twPc-ArrangeSizeFit a:hover {
+  text-decoration: none;
+}
+
+.twPc-StatValue {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.15s ease-in-out 0s;
+}
+.twPc-StatLabel {
+  color: #8899a6;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  text-transform: uppercase;
+  transition: color 0.15s ease-in-out 0s;
+}

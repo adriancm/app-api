@@ -1,0 +1,37 @@
+a.twPc-bg.twPc-block
+.container-fluid
+  .container
+    .row.twPc-bar
+      .twPc-button
+        - case followed
+        - when true
+          = button_tag t(:following).capitalize, class: 'btn btn-primary btn-large'
+        - when false
+          = button_to t(:follow).capitalize, profile_user_path(user), class: 'btn btn-primary btn-large'
+        - else
+          = button_to t(:edit).capitalize, edit_user_registration_url, class: 'btn btn-secondary btn-large'
+      .col-sm-3.col-md-2
+        = link_to profile_user_path(user), title: (user.username), class: 'twPc-avatar'
+          = image_tag user.avatar, alt: user.username
+      .col-sm-3.col-md-4
+        .twPc-divUser
+          .twPc-divName
+            = link_to user.full_name.capitalize, profile_user_path(user)
+          span
+            = link_to '@'+user.username, profile_user_path(user.id)
+      .col-sm-6.col-md-6
+        .twPc-divStats
+          ul.twPc-Arrange
+            li.twPc-ArrangeSizeFit
+              a href="https://twitter.com/mertskaplan" title=("#{user.total_messages} #{t(:message).pluralize.capitalize}")
+                span.twPc-StatLabel.twPc-block = t(:message).pluralize
+                span.twPc-StatValue = user.total_messages
+            li.twPc-ArrangeSizeFit
+              a href="https://twitter.com/mertskaplan/following" title=("#{user.followings} #{t(:following).pluralize.capitalize}")
+                span.twPc-StatLabel.twPc-block = t(:following).pluralize
+                span.twPc-StatValue = user.followings
+            li.twPc-ArrangeSizeFit
+              a href="https://twitter.com/mertskaplan/followers" title=("#{user.followings} #{t(:follower).pluralize.capitalize}")
+                span.twPc-StatLabel.twPc-block = t(:follower).pluralize
+                span.twPc-StatValue = user.followers
+javascript: $("nav#bs-navbar ul li:first").addClass('active');

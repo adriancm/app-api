@@ -17,7 +17,8 @@ FactoryGirl.define do
   end
 
   factory :user do
-    name  { generate(:unique_name) }
+    first_name  { generate(:unique_name) }
+    last_name  { generate(:unique_name) }
     email { generate(:unique_email) }
     username { generate(:unique_username) }
     password { generate(:password) }

@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
 
+  has_many :messages, dependent: :destroy
+
   def self.from_omniauth(uid, auth)
     info = auth.info
     email = info.email
@@ -30,6 +32,27 @@ class User < ActiveRecord::Base
     else
       super
     end
+  end
+
+  def full_name
+    full_name = first_name + ' ' + last_name
+    full_name == ' ' ? username : full_name
+  end
+
+  def avatar
+    'default.jpg'
+  end
+
+  def total_messages
+    messages.count
+  end
+
+  def followings
+    0
+  end
+
+  def followers
+    0
   end
 
   private

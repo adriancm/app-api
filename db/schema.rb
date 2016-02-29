@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218202351) do
+ActiveRecord::Schema.define(version: 20160228171155) do
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "text",       limit: 160
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", limit: 4,     null: false
@@ -54,6 +63,8 @@ ActiveRecord::Schema.define(version: 20150218202351) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
+    t.string   "first_name",             limit: 255, default: ""
+    t.string   "last_name",              limit: 255, default: ""
     t.string   "username",               limit: 255, default: "", null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -65,7 +76,6 @@ ActiveRecord::Schema.define(version: 20150218202351) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.string   "name",                   limit: 255
     t.string   "uid",                    limit: 255
     t.string   "provider",               limit: 255
     t.string   "confirmation_token",     limit: 255
@@ -85,4 +95,5 @@ ActiveRecord::Schema.define(version: 20150218202351) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "messages", "users"
 end

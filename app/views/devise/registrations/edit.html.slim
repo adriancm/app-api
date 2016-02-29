@@ -4,22 +4,37 @@
     h4= t('.title', :resource => resource_class.model_name.human , :default => 'Edit # resource_name.to_s.humanize ')
   .panel-body
     = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-      .form-group
-        = f.label :username
-        = f.text_field :username, class: "form-control"
-      .form-group
-        = f.label :email
-        = f.email_field :email, class: "form-control"
-      .form-group
-        = f.label :password
-        i
-          | (#{t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it")})
-        br/
-        = f.password_field :password, :autocomplete => "off", class: "form-control"
-      .form-group
-        = f.label :password_confirmation
-        br/
-        = f.password_field :password_confirmation, class: "form-control"
+      .row
+        .col-sm-6
+          .form-group
+            = f.label :first_name
+            = f.text_field :first_name, class: 'form-control'
+        .col-sm-6
+          .form-group
+            = f.label :last_name
+            = f.text_field :last_name, class: 'form-control'
+      .row
+        .col-md-6
+          .form-group
+            = f.label :username
+            = f.text_field :username, class: 'form-control'
+        .col-md-6
+          .form-group
+            = f.label :email
+            = f.email_field :email, class: 'form-control'
+      .row
+        .col-sm-6
+          .form-group
+            = f.label :password
+            i
+              | (#{t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it")})
+            br/
+            = f.password_field :password, :autocomplete => "off", class: "form-control"
+        .col-sm-6
+          .form-group
+            = f.label :password_confirmation
+            br/
+            = f.password_field :password_confirmation, class: "form-control"
       .form-group
         = f.label :current_password
         i

@@ -1,6 +1,9 @@
 class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
+      t.string :first_name,                     default: ''
+      t.string :last_name,                      default: ''
+
       ## Database authenticatable
       t.string :username,           null: false, default: ''
       t.string :email,              null: false, default: ''
@@ -19,7 +22,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
-      t.string   :name
 
       t.string   :uid
       t.string   :provider

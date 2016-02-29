@@ -4,7 +4,7 @@
       - @applications.each do |application|
         li.application_list_box data-id=application.id
           / .well
-          = link_to 'edit', edit_oauth_application_url(application), class: 'pull-right'
+          = link_to t(:edit), edit_oauth_application_url(application), class: 'pull-right'
           h4
 
             a.listed-app-name.uncollapsed href='#'

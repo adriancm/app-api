@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   use_doorkeeper
   mount API::Base => '/api'
   resources :developers, only: [:index] do
@@ -8,13 +9,20 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
+  devise_for :users
   devise_scope :user do
     authenticated :user do
-      root 'landing#index', as: :authenticated_root
+      root 'users#profile', as: :authenticated_root
     end
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
+  resources :users, only: [:index], as: 'readme'
+  resources :users, only: [:show] do
+    member do
+      get :profile
     end
   end
 

@@ -24,16 +24,16 @@ describe 'Me API V1', type: :request do
       get '/api/me', format: :json, access_token: @token.token
       result = JSON.parse(response.body)
       expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
-      expect(result['user']['name']).to eq(@user.name)
+      expect(result['user']['username']).to eq(@user.username)
       expect(result['user']['email']).to eq(@user.email)
       expect(response.response_code).to eq(200)
     end
   end
 
-  describe 'items' do 
-    it 'gets items, returning correct pagination serialized by the serializer' do
+  describe 'messages' do
+    it 'gets messages, returning correct pagination serialized by the serializer' do
       create_doorkeeper_app(scopes: OAUTH_SCOPES_S)
-      get '/api/me/items', format: :json, access_token: @token.token
+      get '/api/me/messages', format: :json, access_token: @token.token
       result = JSON.parse(response.body)
 
       expect(result['me'][0].keys.include?('secret')).to_not be_present
@@ -47,37 +47,26 @@ describe 'Me API V1', type: :request do
     context 'incorrectly scoped access token' do
       it "fails if the access token doesn't have the required scope" do
         create_doorkeeper_app(scopes: 'read_user')
-        orig_name = @user.name
-        attributes = {email: 'foo@bar.com', name: 'new namething', access_token: @token.token}
+        username = @user.username
+        attributes = {email: 'foo@bar.com', username: 'new namething', access_token: @token.token}
         put '/api/me', attributes, format: :json
 
         expect(response.response_code).to eq(403)
         expect(response.body.match(/OAuth error.* write to user/i)).to be_present
         @user.reload
-        expect(@user.name).to eq(orig_name)
+        expect(@user.username).to eq(username)
       end
     end
     context 'scoped access token' do
       it 'updates the user' do
         create_doorkeeper_app(scopes: 'write_user')
-        attributes = {email: 'foo@bar.com', name: 'new name', access_token: @token.token}
+        attributes = {email: 'foo@bar.com', username: 'new username', access_token: @token.token}
         put '/api/me', attributes, format: :json
         @user.reload
 
         expect(response.response_code).to eq(200)
-        expect(@user.name).to eq('new name')
+        expect(@user.username).to eq('new username')
         expect(@user.unconfirmed_email).to eq('foo@bar.com')
-      end
-
-      it "fails when one of the supplied values isn't in the params" do 
-        create_doorkeeper_app(scopes: 'write_user')
-        attributes = {demo_value: 'foo', name: 'other', access_token: @token.token}
-        put '/api/me', attributes, format: :json
-
-        expect(response.response_code).to eq(400)
-        expect(response.body).to match('demo_value does not have a valid value')
-        @user.reload
-        expect(@user.name).to_not eq('other')
       end
     end
   end

@@ -32,7 +32,7 @@ module API
       end
 
       mount API::V1::Me
-      mount API::V1::User
+      mount API::V1::Users
 
       add_swagger_documentation base_path: '/api',
                                 api_version: 'v1',

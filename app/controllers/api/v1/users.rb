@@ -15,19 +15,19 @@ module API
       end
 
     end
-    class User < API::V1::Root
+    class Users < API::V1::Root
       include API::V1::Defaults
       helpers API::V1::UserParams
       #helpers DeviseController
 
-      resource :users, desc: 'Operations about the current user' do
+      resource :user, desc: 'Operations with users. (Messages, followings and follower)' do
 
         desc "User's messages"
         oauth2
         params do
           use :user, :pagination
         end
-        get '/messages' do
+        get ':id/messages' do
           messages = Message.where(user: params[:id]).order('created_at DESC')
           list = paginate_api(messages,params[:pagination])
           render ActiveModel::ArraySerializer.new(list,
@@ -43,7 +43,7 @@ module API
           use :user, :pagination
         end
         oauth2
-        get '/followers' do
+        get ':id/followers' do
           followers = User.find_by(id: params[:id]).followers_list rescue []
           list = paginate_api(followers,params[:pagination])
           render ActiveModel::ArraySerializer.new(list,
@@ -58,7 +58,7 @@ module API
         params do
           use :user, :pagination
         end
-        get '/followings' do
+        get ':id/followings' do
           followings = User.find_by(id: params[:id]).followings rescue []
           list = paginate_api(followings,params[:pagination])
           render ActiveModel::ArraySerializer.new(list,

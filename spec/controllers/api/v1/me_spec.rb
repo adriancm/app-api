@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Me API V1', type: :request do
   describe 'current' do
     it 'Sends correct error code when no user present' do
-      get '/apime'
+      get '/api/me'
       expect(response.response_code).to eq(401)
       expect(response.body.match('OAuth')).to be_present
       expect(response.headers['Content-Type'].match('json')).to be_present
@@ -27,19 +27,6 @@ describe 'Me API V1', type: :request do
       expect(result['user']['username']).to eq(@user.username)
       expect(result['user']['email']).to eq(@user.email)
       expect(response.response_code).to eq(200)
-    end
-  end
-
-  describe 'messages' do
-    it 'gets messages, returning correct pagination serialized by the serializer' do
-      create_doorkeeper_app(scopes: OAUTH_SCOPES_S)
-      get '/api/me/messages', format: :json, access_token: @token.token
-      result = JSON.parse(response.body)
-
-      expect(result['me'][0].keys.include?('secret')).to_not be_present
-      expect(response.code).to eq('200')
-      expect(response.header['Total']).to eq('20')
-      expect(response.header['Link'].match('page=2>; rel=\"next\"')).to be_present
     end
   end
 

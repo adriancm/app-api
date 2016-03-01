@@ -78,7 +78,6 @@ If you want to change the name of the app, swap out:
 - `app-api` in [config/database.yml](config/database.yml) (multiple instances)
 - `app-api` in [config/initializers/session_store.rb](config/initializers/session_store.rb)
 
-
 ## Testing
 
 Rspec and guard - run `bundle exec guard` to watch your spec files for changes and rerun tests for those files, otherwise if you prefer just run `rspec`

@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   get 'profile', to: 'users#profile', as: 'profile'
   post 'follow', to: 'follows#create', as: 'follow'
   delete 'unfollow/:id', to: 'follows#destroy', as: 'unfollow'
+  get 'followers', to: 'users#followers'
+  get 'followings', to: 'users#followings'
 end

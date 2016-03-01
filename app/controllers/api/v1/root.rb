@@ -1,6 +1,7 @@
 module API
   module V1
     class Root < Dispatch
+      helpers Api::V1::BaseApiHelper
       format :json
       version 'v1', using: :accept_version_header #:header, vendor: 'app-api'
 
@@ -31,6 +32,7 @@ module API
       end
 
       mount API::V1::Me
+      mount API::V1::User
 
       add_swagger_documentation base_path: '/api',
                                 api_version: 'v1',

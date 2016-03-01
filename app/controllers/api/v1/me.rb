@@ -15,17 +15,6 @@ module API
           render API::V1::UserSerializer.new current_user
         end
 
-        paginate per_page: 10 # This paginates, with a default of 10 per page
-        oauth2
-        get '/messages', each_serializer: API::V1::MessageSerializer do
-          # create some imaginary items
-          items = (0..19).map{ |i|
-            Message.new(user: current_user, text: "Foo #{i*7}")
-          }
-          # We use the item serializer to serialize these items!
-          paginate items
-        end
-
         desc 'Update user, Protected, only accessible with write user'
         params do
           optional :email, type: String, desc: 'User email'

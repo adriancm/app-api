@@ -158,6 +158,7 @@ en:
 #Main
   sign_in: 'sign in'
   sign_up: 'Sign up'
+  sign_out: 'Sign out'
   show: 'show'
   edit: 'edit'
   destroy: 'destroy'
@@ -166,6 +167,7 @@ en:
   message: 'message'
   are_you_sure: 'Are you sure?'
   follow: 'follow'
+  unfollow: 'unfollow'
   following: 'following'
   follower: 'followers'
   whatsapp: "What's happening?"

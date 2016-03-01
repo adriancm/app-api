@@ -39,3 +39,6 @@ html
               = link_to t(:sign_in).capitalize, new_user_session_url, class: 'btn btn-default navbar-btn navbar-right'
     = render partial: 'layouts/flash_messages', flash: flash
     = yield
+
+- if content_for?(:js)
+  = yield(:js)

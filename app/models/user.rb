@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
 
+  has_many :followers, class_name: 'Follow', foreign_key: 'follower_id'
+  has_many :follows, class_name: 'Follow', foreign_key: 'followed_id', dependent: :destroy
+  has_many :followings, through: :follows, source: :follower
+
   def self.from_omniauth(uid, auth)
     info = auth.info
     email = info.email
@@ -47,20 +51,17 @@ class User < ActiveRecord::Base
     messages.count
   end
 
-  def followings
-    0
+  def total_followings
+    follows.count
   end
 
-  def followers
-    0
+  def total_followers
+    followers.count
   end
 
-  def follow?(user)
-    nil
-  end
-
-  def following_messages
-    messages
+  def is_follower?(user)
+    return false if user.id == id
+    followings.where(id: user.id).take.try(:id)
   end
 
   private

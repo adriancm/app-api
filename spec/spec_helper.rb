@@ -38,6 +38,13 @@ def create_user
   @user = FactoryGirl.create(:user)
 end
 
+def create_n_users(n)
+  @users = []
+  n.times do
+    @users << FactoryGirl.create(:user)
+  end
+end
+
 def create_doorkeeper
   create_user
   @application = Doorkeeper::Application.create(name: 'MyApp', redirect_uri: 'https://app.com')
@@ -48,4 +55,13 @@ def create_doorkeeper_app(opts={})
   scopes = opts && opts[:scopes] || 'public'
   @token = Doorkeeper::AccessToken.create!(application_id: @application.id,
     resource_owner_id: @user.id, scopes: scopes)
+end
+
+def login_user
+  before(:each) do
+    @request.env['devise.mapping'] = Devise.mappings[:user]
+    user = FactoryGirl.create(:user)
+    user.confirm
+    sign_in user
+  end
 end

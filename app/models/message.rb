@@ -3,4 +3,7 @@ class Message < ActiveRecord::Base
 
   validates_presence_of :user
   validates :text, presence: true, length: { maximum: 160 }
+
+  scope :recent, -> (ids) { where(user_id: ids).order('created_at DESC') }
+
 end

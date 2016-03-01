@@ -1,24 +1,26 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
+  before_action :authenticate_user!
+
   def index; end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @message = Message.new
-    @followed = current_user.try(:follow?, @user)
+    @followed = current_user.is_follower? @user
+    @messages = @user.messages
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
     end
   end
 
-  # GET /users/1
-  # GET /users/1.json
+  # GET /profile
+  # GET /profile.json
   def profile
     @message = Message.new
-
+    @messages = Message.recent(current_user.followings.pluck(:id))
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }

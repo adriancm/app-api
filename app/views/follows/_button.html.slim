@@ -1,0 +1,36 @@
+.mn-twPc-button
+  - case followed
+  - when nil
+    = button_tag t(:follow).capitalize, class: 'btn btn-primary btn-large follow', id: 'follow_btn'
+  - when false
+    = button_to t(:edit).capitalize, edit_user_registration_url, class: 'btn btn-secondary btn-large', method: :get
+  - else
+    = button_tag t(:following).capitalize, class: 'btn btn-primary btn-large unfollow', id: 'follow_btn', value: followed
+
+- content_for :js
+  javascript:
+    $('#follow_btn').click(function () {
+      if ($(this).hasClass('follow')) {
+        $.ajax({
+          url: "#{follow_path}", type: 'POST', contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify({follower_id: "#{user.id}"}), dataType: "json",
+          success: function (result) {
+            $('#follow_btn').removeClass('follow').html("#{t(:following).capitalize}").val(result);
+          },
+          error: function () {
+            window.alert("something wrong!");
+          }
+        });
+      } else {
+        $.ajax({
+          url: "#{unfollow_path(user)}", type: 'DELETE', contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify({id: $(this).attr('value')}), dataType: "json",
+          success: function (result) {
+            $('#follow_btn').addClass('follow').html("#{t(:follow).capitalize}").removeAttr('value');
+          },
+          error: function () {
+            window.alert("something wrong!");
+          }
+        });
+      }
+    });

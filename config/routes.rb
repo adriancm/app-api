@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :messages
   use_doorkeeper
   mount API::Base => '/api'
   resources :developers, only: [:index] do
@@ -19,11 +18,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index], as: 'readme'
-  resources :users, only: [:show] do
-    member do
-      get :profile
-    end
-  end
+  resources :users, only: [:index], as: 'readme', path: 'readme'
+  resources :users, only: [:show]
+  resources :messages, only: [:create, :destroy]
 
+  get 'profile', to: 'users#profile', as: 'profile'
+  post 'follow', to: 'follows#create', as: 'follow'
+  delete 'unfollow/:id', to: 'follows#destroy', as: 'unfollow'
 end

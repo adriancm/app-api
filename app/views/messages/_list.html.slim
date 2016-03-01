@@ -3,7 +3,7 @@ ol#messages
     li data-item-id="#{message.id}"
       .content
         .message-header
-          = link_to profile_user_path(message.user_id), title: (message.user.username)
+          = link_to user_path(message.user_id), title: (message.user.username)
             = image_tag message.user.avatar, alt: message.user.username, size: '40x40'
           span.username
             s @

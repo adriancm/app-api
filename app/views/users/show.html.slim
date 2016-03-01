@@ -3,4 +3,4 @@
   .container
     .row.top10
       .col-sm-offset-2
-        = render partial: 'messages/list', locals: {messages: current_user.following_messages }
+        = render partial: 'messages/list', locals: {messages: @messages }

@@ -6,7 +6,7 @@
 
  [![Deploy](https://www.herokucdn.com/favicon.ico)](https://v-app-api.herokuapp.com/)
  
-#### Create an awesome versioned API, secured with OAuth2 and automatically documented.
+#### App with versioned API, secured with OAuth2 and automatically documented.
 
 This is a basic Rails 4 application with [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper), [Grape](https://github.com/intridea/grape) & [Swagger](http://swagger.io/) for getting to API building quickly.
 
@@ -14,9 +14,31 @@ You can view the [live app](https://v-app-api.herokuapp.com/) and the [Swagger-u
 
 ## Set up
 
+Create .env file in the main folder of the project
+
+#### .env file
+    SECRET_KEY_BASE=
+    DEVISE_SECRET_KEY=
+    
+    DEFAULT_HOST=localhost:3000
+    EMAIL_ADDRESS=
+    EMAIL_PORT=
+    EMAIL_DOMAIN=
+    EMAIL_USER_NAME=
+    EMAIL_PASS=
+    EMAIL_AUTHENTICATION=
+    EMAIL_STARTTLS=
+    
+    APP_API_DATABASE_USER=
+    APP_API_DATABASE_PASSWORD=
+
 First `bundle install` and `rake db:setup`
 
 Run `rake start` to get the server running locally. It runs at [http://localhost:3001](http://localhost:3001)
+
+Otherwise
+
+Run `rails s` to get the server running locally. It runs at [http://localhost:3000](http://localhost:3000)
 
 ## Notes
 
@@ -59,6 +81,4 @@ If you want to change the name of the app, swap out:
 
 ## Testing
 
-Rspec and guard - run `bundle exec guard` to watch your spec files for changes and rerun tests for those files.
-
-There is a spec for the `api/v1/me` API route and for the swagger docs to help get you started.
+Rspec and guard - run `bundle exec guard` to watch your spec files for changes and rerun tests for those files, otherwise if you prefer just run `rspec`

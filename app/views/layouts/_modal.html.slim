@@ -5,7 +5,7 @@
         button.close aria-label="Close" data-dismiss="modal" type="button"
           span aria-hidden="true"  &times;
         h4#myModalLabel.modal-title = @title
-      .modal-body
+      #myModalBody.modal-body
         - if content_for?(:modal)
           = yield(:modal)
       //.modal-footer

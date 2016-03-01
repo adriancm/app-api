@@ -1,0 +1,12 @@
+ol
+  - follows.each do |follow|
+    li data-item-id="#{follow.id}"
+      .content
+        .message-header
+          = link_to user_path(follow.id), title: (follow.username)
+            = image_tag follow.avatar, alt: follow.username, size: '40x40'
+          span.username
+            s @
+            b = follow.username
+        small.time
+          span = follow.created_at.strftime('%d %B %Y')

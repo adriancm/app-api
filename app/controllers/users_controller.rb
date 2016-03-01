@@ -27,6 +27,24 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /profile
+  # GET /profile.json
+  def followers
+    @title = t(:follower).pluralize
+    @follows = current_user.followers_list
+    respond_to do |format|
+      format.js { render partial: 'users/follows' }
+    end
+  end
+
+  def followings
+    @title = t(:following).pluralize
+    @follows = current_user.followings
+    respond_to do |format|
+      format.js { render partial: 'users/follows' }
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user

@@ -8,7 +8,7 @@
 
 random = Random.new(1234)
 users = []
-50.times do | n |
+20.times do | n |
   user = User.new(username: "test#{n}", email: "test#{n}@api-app.com", password: '12345678', password_confirmation: '12345678', first_name: "Name#{n}", last_name: "Last#{n}")
   user.messages.build text: "message test #{n}"
   user.messages.build text: "message test #{n+1}"

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :followers, :followings]
 
   before_action :authenticate_user!, except: :index
 
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   # GET /profile.json
   def followers
     @title = t(:follower).capitalize.pluralize
-    @follows = current_user.followers_list
+    @follows = @user.followers_list
     respond_to do |format|
       format.js { render template: 'users/follows' }
     end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   def followings
     @title = t(:following).capitalize.pluralize
-    @follows = current_user.followings
+    @follows = @user.followings
     respond_to do |format|
       format.js { render template:'users/follows' }
     end

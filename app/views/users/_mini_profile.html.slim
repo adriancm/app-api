@@ -16,11 +16,11 @@
             span.mn-twPc-StatLabel.mn-twPc-block = t(:message).pluralize
             span.mn-twPc-StatValue = user.total_messages
         li.mn-twPc-ArrangeSizeFit
-          a href="#{followings_path}" data-remote= true id='followings' title=("#{user.total_followings} #{t(:following).pluralize.capitalize}") data-toggle="modal" data-target="#myModal"
+          a href="#{followings_path(user)}" data-remote= true id='followings' title=("#{user.total_followings} #{t(:following).pluralize.capitalize}") data-toggle="modal" data-target="#myModal"
             span.mn-twPc-StatLabel.mn-twPc-block = t(:following).pluralize
             span.mn-twPc-StatValue = user.total_followings
         li.mn-twPc-ArrangeSizeFit
-          a href="#{followers_path}" data-remote= true title=("#{user.total_followers} #{t(:follower).pluralize.capitalize}") data-toggle="modal" data-target="#myModal"
+          a href="#{followers_path(user)}" data-remote= true title=("#{user.total_followers} #{t(:follower).pluralize.capitalize}") data-toggle="modal" data-target="#myModal"
             span.mn-twPc-StatLabel.mn-twPc-block = t(:follower).pluralize
             span.mn-twPc-StatValue = user.total_followers
 

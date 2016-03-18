@@ -2,7 +2,7 @@ ruby '2.2.3'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.2'
+gem 'rails', '4.2.6'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
@@ -12,10 +12,10 @@ gem 'mysql2'
 gem 'sass'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 2.7.2'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.1.1'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.1.0'
+gem 'jquery-rails', '~> 4.1.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
@@ -51,9 +51,7 @@ gem 'grape-swagger'
 gem 'api-pagination'
 gem 'rack-cors', :require => 'rack/cors'
 
-# Temporarily remote branch because updates, for more info look at
-# https://github.com/d4be4st/swagger-ui_rails/pull/13
-gem 'swagger-ui_rails', github: 'audionerd/swagger-ui_rails'
+gem 'swagger-ui_rails'
 
 group :development, :test do
   gem 'rspec-rails'

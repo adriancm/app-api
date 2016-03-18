@@ -11,10 +11,10 @@ class User < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
 
-  has_many :followers, class_name: 'Follow', foreign_key: 'follower_id'
   has_many :follows, class_name: 'Follow', foreign_key: 'followed_id', dependent: :destroy
-  has_many :followers_list, through: :followers, source: :followed
+  has_many :inverse_follows, class_name: 'Follow', foreign_key: 'follower_id'
   has_many :followings, through: :follows, source: :follower
+  has_many :followers, through: :inverse_follows, source: :followed
 
   def self.from_omniauth(uid, auth)
     info = auth.info
@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   end
 
   def total_followers
-    followers.count
+    inverse_follows.count
   end
 
   def is_follower?(user)

@@ -71,7 +71,7 @@ describe 'Users API V1', type: :request do
     it 'responds with the messages' do
       create_doorkeeper_app(scopes: OAUTH_SCOPES_S)
       create_n_users 1
-      @user.followers.build(followed_id: @users.first.id).save
+      @user.inverse_follows.build(followed_id: @users.first.id).save
       get "/api/user/#{@user.id}/followers", format: :json, access_token: @token.token
       result = JSON.parse(response.body)
       expect(response.headers['Access-Control-Allow-Origin']).to eq('*')

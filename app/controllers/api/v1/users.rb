@@ -44,7 +44,7 @@ module API
         end
         oauth2
         get ':id/followers' do
-          followers = User.find_by(id: params[:id]).followers_list rescue []
+          followers = User.find_by(id: params[:id]).followers rescue []
           list = paginate_api(followers,params[:pagination])
           render ActiveModel::ArraySerializer.new(list,
                                                   each_serializer: API::V1::UserSerializer,

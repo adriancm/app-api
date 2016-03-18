@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   # GET /profile.json
   def followers
     @title = t(:follower).capitalize.pluralize
-    @follows = @user.followers_list
+    @follows = @user.followers
     respond_to do |format|
       format.js { render template: 'users/follows' }
     end
